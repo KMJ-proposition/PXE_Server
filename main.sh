@@ -3,12 +3,19 @@
 # 1. 패키지 설치 관리자
 # 2. 방화벽 설정
 # 3. DHCP 설정
-# 4. 
+# 4. 이미지 파일 마운트 및 복사
+# 5. 킥스타트 설정
 
 # modules
-source ./modules/package_install.sh
-source ./modules/firewall_config.sh
-source ./modules/dhcp_config.sh
+source ./modules/01_package_install.sh
+source ./modules/02_firewall_config.sh
+source ./modules/03_dhcp_config.sh
+source ./modules/04_image_file.sh
+source ./modules/05_kickstart_config.sh
+
+# global variables
+PxeFileLoc="/var/www/html"
+ServerIp="$(hostname -I)"
 
 # Check authentication
 Auth="$(id -u)"
@@ -52,6 +59,9 @@ do
 			;;
 		4) # Run module 4 - Image Mounting & Copy Files
 			ImageFile
+			;;
+		5) # Run module 5 - Kickstart Config
+			Kickstart
 			;;
 		0)
 			echo ">>> 환경 구축을 종료합니다."

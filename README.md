@@ -1,4 +1,14 @@
-#PXE Server 구축
-##OS - Rocky Linux 9.6 (Blue Onyx)
+PXE Server 구축
 
-####2026-07
+===
+
+##### OS
+
+Rocky Linux 9.6 (Blue Onyx)
+
+
+
+##### Date
+
+###### 2026-07
+
