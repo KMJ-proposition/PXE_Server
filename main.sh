@@ -1,0 +1,63 @@
+#!/bin/bash
+# 0. main.sh
+# 1. 패키지 설치 관리자
+# 2. 방화벽 설정
+# 3. DHCP 설정
+# 4. 
+
+# modules
+source ./modules/package_install.sh
+source ./modules/firewall_config.sh
+source ./modules/dhcp_config.sh
+
+# Check authentication
+Auth="$(id -u)"
+if [[ $Auth -ne 0 ]]; then
+	echo "[오류 000] 관리자 계정으로 실행해주세요."
+	if [[ ! -d "logs" ]]; then
+		#mkdir ./logs 2>/dev/null
+		#echo "[오류 000] 권한 오류 - $(date +%Y-%m-%d-%H:%M:%S)_실행자:$(id)" >> ./Error.log
+		echo -e "[권한 오류] 일자: $(date +%Y-%m-%d-%H:%M:%S)\nUSER: $(whoami)\nUID:  $(id -u)"
+	#else
+	#	echo "[오류 000] 권한 오류 - $(date +%Y-%m-%d-%H:%M:%S)_실행자 : $(id)" >> ./logs/Error.log
+	fi
+	exit 1
+fi
+
+# Script Banner
+echo ">>> Rocky Linux 9.6 PXE 서버 환경을 구축해주는 스크립트입니다."
+
+while :
+do 
+	echo "--------------------------------------------------------------"
+	echo "1. 패키지 설치"
+	echo "2. 방화벽 설정"
+	echo "3. DHCP 설정"
+	echo "4. 이미지 파일 준비"
+	echo "5. "
+	echo "6. "
+	echo "0. 종료"
+	echo "--------------------------------------------------------------"
+	read -p ">>> 메뉴를 선택해주세요: " menu
+
+	case $menu in
+		1) # Run module 1 - Package Installer
+			PackInstall
+			;;
+		2) # Run module 2 - Firewalld Config
+			FirewallCmd
+			;;
+		3) # Run module 3 - DHCP Config
+			DhcpConfig
+			;;
+		4) # Run module 4 - Image Mounting & Copy Files
+			ImageFile
+			;;
+		0)
+			echo ">>> 환경 구축을 종료합니다."
+			exit 0
+			;;
+	esac	
+done
+
+echo -e "\n\n\n테스트용\n\n\n"
