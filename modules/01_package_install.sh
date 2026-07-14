@@ -9,17 +9,19 @@ PackInstall() {
 		echo "[오류 001] 네트워크에 연결되어 있지 않습니다."
 		exit 1
 	else
-		echo "네트워크에 연결되어 있습니다."
+		echo ">>> 네트워크에 연결되어 있습니다."
 	fi
 
 	read -p "패키지를 설치하시겠습니까?[y/N] " Install
 	case $Install in
 		Y|y|YES|Yes|yes)
-			echo "패키지 설치를 진행합니다."
+			echo ">>> 패키지 설치를 진행합니다."
 			dnf install -y syslinux httpd tftp-server dhcp-server
+			systemctl enable --now httpd
+			[설정 완료] httpd를 실행하였습니다.
 			;;
 		*)
-			echo "설치를 취소합니다."
+			echo ">>> 설치를 취소합니다."
 			;;
 	esac
 }

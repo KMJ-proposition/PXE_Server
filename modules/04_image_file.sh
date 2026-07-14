@@ -11,17 +11,11 @@ ImageFile() {
 		exit 1
 	fi
 
-	(rpm -q tftp-server && systemctl status tftp-server | grep "active (running)")>/dev/null
-	if [[ $? -ne 0 ]]; then
-		echo "[오류 014] TFTP 서버가 작동중이지 않습니다."
-		exit 1
-	fi
-
 	if [[ ! -d $InstallFileLoc ]]; then
 		mkdir -p $InstallFileLoc
 	fi
 
-	(umount /dev/cdrom && mount /dev/cdrom $InstallFileLoc)>/dev/null
+	umount /dev/cdrom && mount /dev/cdrom $InstallFileLoc | tail -n 5 2>/dev/null
 	if [[ $? -ne 0 ]]; then
 		echo "이미지 파일이 정상적으로 마운트되지 않았습니다. 이미지를 삽입해주세요."
 	else
