@@ -129,7 +129,7 @@ F. 킥스타트 파일 설정
 	    repo --name="AppStream" --baseurl=http://192.168.10.100/pub/AppStream
             # 17번 줄 'cdrom~' 주석 처리
 	    # 19번 줄 'network  --bootproto=static~' 주석 처리 및 행 추가
-	    network  --bootproto=dhcp  --
+	    network  --bootproto=dhcp  --Hostname=Rocky
             # 20번 줄 %packages 하단에 설치 할 패키지 추가
             @^Server with GUI # 서버 환경 그룹
             @GNOME Applications # GNOME 응용 프로그램
