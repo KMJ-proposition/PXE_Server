@@ -13,22 +13,10 @@ source ./modules/03_dhcp_config.sh
 source ./modules/04_image_file.sh
 source ./modules/05_kickstart_config.sh
 
-# global variables
-PxeFileLoc="/var/www/html"
-ServerIp="$(hostname -I)"
-
 # Check authentication
 Auth="$(id -u)"
 if [[ $Auth -ne 0 ]]; then
 	echo "[오류 000] 관리자 계정으로 실행해주세요."
-	if [[ ! -d "logs" ]]; then
-		#mkdir ./logs 2>/dev/null
-		#echo "[오류 000] 권한 오류 - $(date +%Y-%m-%d-%H:%M:%S)_실행자:$(id)" >> ./Error.log
-		echo -e "[권한 오류] 일자: $(date +%Y-%m-%d-%H:%M:%S)\nUSER: $(whoami)\nUID:  $(id -u)"
-	#else
-	#	echo "[오류 000] 권한 오류 - $(date +%Y-%m-%d-%H:%M:%S)_실행자 : $(id)" >> ./logs/Error.log
-	fi
-	exit 1
 fi
 
 # Script Banner
@@ -63,7 +51,7 @@ do
 			Kickstart
 			;;
 		0)
-			echo ">>> 환경 구축을 종료합니다."
+			echo ">>> PXE 환경 구축을 종료합니다."
 			exit 0
 			;;
 	esac	
