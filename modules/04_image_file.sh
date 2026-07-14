@@ -24,10 +24,9 @@ ImageFile() {
         	cp $InstallFileLoc/images/pxeboot/initrd.img $BootFileLoc
         	cp $InstallFileLoc/isolinux/ldlinux.c32 $BootFileLoc
         	cp /usr/share/syslinux/pxelinux.0 $BootFileLoc
-		chmod 644 /var/www/html/rocky.ks
 		mkdir -p $BootFileLoc/pxelinux.cfg/
 		touch $BootFileLoc/pxelinux.cfg/default
 		echo -e "DEFAULT		Rocky9.6 PXE Install\n\nLABEL		Rocky9.6 PXE Install
-	        kernel	vmlinuz\nAPPEND		initrd=initrd.img	inst.repo=http://$ServerIp/pub" > $BootFileLoc/pxelinux.cfg/default
+	        kernel	vmlinuz\nAPPEND	initrd=initrd.img	inst.repo=http://$ServerIp/pub	inst.ks=http://$ServerIp/rocky.ks" > $BootFileLoc/pxelinux.cfg/default
 	fi
 }

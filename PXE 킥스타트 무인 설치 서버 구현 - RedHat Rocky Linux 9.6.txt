@@ -71,9 +71,9 @@ E. 패키지 설치 및 설정
         dnf install -y vim syslinux dhcp-server tftp-server httpd
 
     - 방화벽 설정
-	# 66, 67, 69번 포트: dhcp handshake, 80번 포트: http
-        firewall-cmd --permanent --add-port=66/tcp
-        firewall-cmd --permanent --add-port=67/tcp
+	# 67, 68, 69번 포트: dhcp handshake, 80번 포트: http
+        firewall-cmd --permanent --add-port=67/udp
+        firewall-cmd --permanent --add-port=68/udp
         firewall-cmd --permanent --add-port=69/udp
         firewall-cmd --permanent --add-port=80/tcp
 

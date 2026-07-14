@@ -10,8 +10,8 @@ FirewallCmd() {
 		systemctl start firewalld
 	fi
 	
-        firewall-cmd --permanent --add-port=66/tcp 
-        firewall-cmd --permanent --add-port=67/tcp
+        firewall-cmd --permanent --add-port=67/udp
+        firewall-cmd --permanent --add-port=68/udp
         firewall-cmd --permanent --add-port=69/udp
         firewall-cmd --permanent --add-port=80/tcp
 	firewall-cmd --reload
