@@ -10,7 +10,7 @@ Kickstart() {
 	sed -i "s/^repo.*/repo --name=\"AppStream\" --baseurl=http:\/\/$ServerIP\/pub\/AppStream\/\\nurl --url=http:\/\/$ServerIP\/pub/" "$NewKsFile"
 	sed -i "s/^network  --bootproto=static.*/network  --bootproto=dhcp/" "$NewKsFile"
 	cutLine=$(grep -nE "graphical-server-environment" "$NewKsFile" | cut -d: -f1)
-	sed -i "${cutLine}a @GNOME Applications\nmc\nvim" "$NewKsFile"
+	sed -i "${cutLine}i @^Server with GUI\n@GNOME Applications\nmc\nvim" "$NewKsFile"
 	sed -i "s/^rootpw.*/#root/" "$NewKsFile"
 	sed -i "s/^user.*/#user/" "$NewKsFile"
 
