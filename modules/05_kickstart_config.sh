@@ -21,11 +21,11 @@ Kickstart() {
 	echo "[설정 완료] 클라이언트 PC의 주소 DHCP로 설정 완료"
 
 	cutLine=$(grep -nE "^\%packages" $NewKsFile | cut -d: -f1)
-	sed -i "${cutLine}i \n@^Server with GUI\@GNOME Applications\nmc\nvim" $NewFsFile | grep -nE "packages" -A5
+	sed -i "${cutLine}a \n@^Server with GUI\@GNOME Applications\nmc\nvim" $NewKsFile | grep -nE "packages" -A5
 	echo "[설정 완료] 클라이언트 PC에 설치할 기본 키지 설정 완료"
 
 	cutLine=$(grep -n "^rootpw" $NewKsFile | cut -d: -f1)
-	sed -i "${cutLine}c #" $NewKsFile | grep -n "^roowpw"
+	sed -i "${cutLine}c #" $NewKsFile | grep -n "^rootpw"
 	cutLine=$(grep -n "^user" $NewKsFile | cut -d: -f1)
 	sed -i "${cutLine}c #user" $NewKsFile | grep -n "^#user"
 	echo "[설정 완료] 클라이언트 PC의 root, 사용자 계정의  비밀번호 삭제 및 초기화 완료"
@@ -35,12 +35,12 @@ Kickstart() {
 	read -p "사용할 사용자 계정 이름을 입력하세요(예:rocky).: " UserName
 	read -p "사용자 계정의 비밀번호 입력하세요.: " Password
 	useradd -m -p $(openssl passwd -6 "$Password") $UserName
-	Password="$(getent shadow rocky) | cut -d: -f2"
+	Password=$(getent shadow rocky | cut -d: -f2)
 	
-	cutLine=$(grep -n "^#user" $NewFsFile | cut -d: -f1)
+	cutLine=$(grep -n "^#user" $NewKsFile | cut -d: -f1)
 	sed -i "${cutLine}c user --groups=wheel --name=$UserName --password=$Password --iscrypted --gecos="$UserName"" $NewKsFile
 	echo "[설정 완료] 클라이언트 PC의 사용자 계정 초기화 완료"
 
-	echo -e "\n\nreboot" >> $NewFsFile
+	echo -e "\n\nreboot" >> $NewKsFile
 	echo "[설정 완료] OS 설치 후 자동 재부팅 설정 완료"
 }
