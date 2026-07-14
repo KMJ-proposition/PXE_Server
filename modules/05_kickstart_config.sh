@@ -4,10 +4,10 @@
 Kickstart() {
 	KsFileLoc="/root/anaconda-ks.cfg"
 	NewKsFile="/var/www/html/rocky.ks"
-	ServerIP=$(hostname -I)
+	ServerIP=$(hostname -I | awk '{print $1}')
 
 	cp "$KsFileLoc" "$NewKsFile"
-	sed -i "s/^repo.*/repo --name=\"AppStream\" --baseurl=http:\/\/$ServerIP\/pub\/AppStream/\\nurl --url=http:\/\/$ServerIP\/pub/" "$NewKsFile"
+	sed -i "s/^repo.*/repo --name=\"AppStream\" --baseurl=http:\/\/$ServerIP\/pub\/AppStream\/\\nurl --url=http:\/\/$ServerIP\/pub/" "$NewKsFile"
 	sed -i "s/^network  --bootproto=static.*/network  --bootproto=dhcp/" "$NewKsFile"
 	cutLine=$(grep -nE "graphical-server-environment" "$NewKsFile" | cut -d: -f1)
 	sed -i "${cutLine}a @GNOME Applications\nmc\nvim" "$NewKsFile"

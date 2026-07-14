@@ -4,6 +4,7 @@
 ImageFile() {
 	InstallFileLoc="/var/www/html/pub"
 	BootFileLoc="/var/lib/tftpboot"
+	ServerIp=$(hostname -I | awk '{print $1}')
 
 	(rpm -q httpd && systemctl status httpd | grep "active (running)")>/dev/null
 	if [[ $? -ne 0 ]]; then
@@ -27,6 +28,6 @@ ImageFile() {
 		mkdir -p $BootFileLoc/pxelinux.cfg/
 		touch $BootFileLoc/pxelinux.cfg/default
 		echo -e "DEFAULT		Rocky9.6 PXE Install\n\nLABEL		Rocky9.6 PXE Install
-	        kernel	vmlinuz\nAPPEND		initrd=initrd.img	inst.repo=http://$ServerIp/pub"
+	        kernel	vmlinuz\nAPPEND		initrd=initrd.img	inst.repo=http://$ServerIp/pub" > $BootFileLoc/pxelinux.cfg/default
 	fi
 }
