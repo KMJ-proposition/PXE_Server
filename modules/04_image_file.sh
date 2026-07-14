@@ -19,16 +19,14 @@ ImageFile() {
 	if [[ $? -ne 0 ]]; then
 		echo "이미지 파일이 정상적으로 마운트되지 않았습니다. 이미지를 삽입해주세요."
 	else
-        cp $InstallFileLoc/images/pxeboot/vmlinuz $BootFileLoc
-        cp $InstallFileLoc/images/pxeboot/initrd.img $BootFileLoc
-        cp $InstallFileLoc/isolinux/ldlinux.c32 $BootFileLoc
-        cp /usr/share/syslinux/pxelinux.0 $BootFileLoc
+        	cp $InstallFileLoc/images/pxeboot/vmlinuz $BootFileLoc
+        	cp $InstallFileLoc/images/pxeboot/initrd.img $BootFileLoc
+        	cp $InstallFileLoc/isolinux/ldlinux.c32 $BootFileLoc
+        	cp /usr/share/syslinux/pxelinux.0 $BootFileLoc
 		chmod 644 /var/www/html/rocky.ks
-
 		mkdir -p $BootFileLoc/pxelinux.cfg/
 		touch $BootFileLoc/pxelinux.cfg/default
 		echo -e "DEFAULT		Rocky9.6 PXE Install\n\nLABEL		Rocky9.6 PXE Install
-	        kernel	vmlinuz
-	        APPEND	initrd=initrd.img	inst.repo=http://$ServerIp/pub"
+	        kernel	vmlinuz\nAPPEND		initrd=initrd.img	inst.repo=http://$ServerIp/pub"
 	fi
 }
