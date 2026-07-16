@@ -30,7 +30,7 @@ Automation - Only for RedHat Linux 9.6(Blue Onyx)
 |준비사항|설명|
 |-|-|
 |1. ISO 이미지 준비|Rocky Linux 9.6 5.14.0-570.42.2-el9_6.x86_64|
-|2. Network|DHCP가 할당 가능한 네트워크(VMware NAT 또는 Hyper-V Internal 등)|
+|2. Network|DHCP가 할당 가능한 네트워크(VMware NAT 등)|
 |3. 가상 머신의 DHCP 기능 종료|PXE 서버의 원활한 DHCP 할당을 하기 위한 필수 조건|
 |4. firewalld 설정|보안을 위해 방화벽을 종료하지 않은 채로 설치해야 한다.|
 

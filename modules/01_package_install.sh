@@ -18,7 +18,7 @@ PackInstall() {
 			echo ">>> 패키지 설치를 진행합니다."
 			dnf install -y syslinux httpd tftp-server dhcp-server
 			systemctl enable --now httpd tftp
-			[설정 완료] 패키지를 실행하였습니다.
+			echo "[설정 완료] 패키지를 실행하였습니다."
 			;;
 		*)
 			echo ">>> 설치를 취소합니다."

@@ -12,7 +12,7 @@ Kickstart() {
 	sed -i "/graphical-server-environment/c @^Server with GUI\n@GNOME Applications\nmc\nvim" "$NewKsFile"
 	sed -i "s/^rootpw.*/#root/" "$NewKsFile"
 	sed -i "s/^user.*/#user/" "$NewKsFile"
-	sed -i "s/^cdrom/#cdrom/ "$NewKsFile"
+	sed -i "s/^cdrom/#cdrom/" "$NewKsFile"
 
 	read -p "사용 할 사용자 계정의 이름을 입력하세요(예:rocky).: " UserName
 	read -p "사용 할 사용자 계정의 비밀번호 입력하세요.: " Password
