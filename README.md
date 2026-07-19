@@ -112,7 +112,7 @@ Automation - Only for RedHat Linux 9.6(Blue Onyx)
 
 4. 이미지 마운트 및 마운트 지점을 PXE 설치 파일 제공용 디렉터리로 변경
 	```bash
-		mount /etc/cdrom /var/www/html/pub
+		mount /dev/cdrom /var/www/html/pub
 	```
 
 5. 파일 복사
